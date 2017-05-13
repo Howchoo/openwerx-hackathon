@@ -2,7 +2,8 @@
 
 from getSentiment import *
 from rssfeedinterface import *
-
-feed = RssFeedInterface('https://streemian.com/rss/')
-someNews = feed.get_single_entry(0)
-getSetiment(str(someNews))
+def getLatestSetiment():
+	feed = RssFeedInterface('https://streemian.com/rss/')
+	someNews = feed.get_single_entry(0)
+	latest = getSetiment(str(someNews))
+	return latest
