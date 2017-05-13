@@ -14,8 +14,8 @@ class SteemExplorer extends Component {
 			selectedTrend: '',
 			trending: [],
 			content: [],
-			accounts: []
-
+			accounts: [],
+			neuralNet: {}
 		}
 	}
 	
@@ -38,7 +38,9 @@ class SteemExplorer extends Component {
             
             this.setContentObj(result.content)
             this.setAccountObj(result.accounts)
-            
+            //try {
+            	this.createNeuralNet(result)
+        	//}
             console.log(`/trends/${val.value}`, result);
 		})
 	}
@@ -66,6 +68,66 @@ class SteemExplorer extends Component {
 	  console.log('accounts arr ', arr)
 	}
 
+	createNeuralNet = (obj) => {
+		let nodes = []
+		let edges = []
+		let s = new sigma('neuralNet')
+		$.each(obj.accounts, (k, v) => {
+			nodes.push({
+				id: `${v.id}`,
+				label: v.name,
+				x: v.post_count,
+				y: v.posting_rewards,
+				size: v.voting_power
+			})
+			s.graph.addNode({
+				id: `${v.id}`,
+				label: v.name,
+				x: v.post_count,
+				y: v.posting_rewards,
+				size: v.voting_power
+			})
+		})
+
+		console.log('accounts for neural net', nodes)
+		let edgeLength = 0
+		$.each(obj.content, (k, v) => {
+			edgeLength++
+		})
+		console.log('edge length', edgeLength)
+		let i = 0
+		$.each(obj.content, (k, v) => {
+			if(i<nodes.length-1) {
+				console.log(`i ${i} in`)
+				edges.push({
+					id: `${v.id}`,
+					source: nodes[Math.floor(Math.random() * (nodes.length-1 - 0)) + 0].id,
+					target: nodes[Math.floor(Math.random() * (nodes.length-1 - 0)) + 0].id
+				})
+				s.graph.addEdge({
+					id: `${v.id}`,
+					source: nodes[Math.floor(Math.random() * (nodes.length-1 - 0)) + 0].id,
+					target: nodes[Math.floor(Math.random() * (nodes.length-1 - 0)) + 0].id
+				})
+			}
+			console.log(`i ${i} out`)
+			i++
+		})
+
+		console.log('content edges for neural net', edges)
+		const neuralNet = {
+			nodes,
+			edges
+		}
+		console.log('Neural net object ', JSON.stringify(neuralNet))
+		this.setState({ neuralNet: JSON.stringify(neuralNet) })
+
+		
+
+		s.refresh()
+			$(this.Net).css({'width':'800px'},{'height':'500px'})
+	}
+
 	mapOptions = (vals) => {
 		console.log('Trending', vals)
 		return vals.map(val => ({ label: val, value: val}))
@@ -79,21 +141,23 @@ class SteemExplorer extends Component {
 		return (
 			<div>
 				<h2>Trending Topics</h2>
+				<div id='neuralNet' ref={r => this.Net = r} width="800px" height="500px" style={{height: '500px'}}></div>
 				<Select
 					name='trending'
 					value={selectedTrend}
 					options={trendingOptions}
 					onChange={this.handleTrendingSelect}
 				/>
-				{content && content.map(({name,body}) => (
-					<div className="ui grid">
+				<div id='neuralNet' ref={r => this.Net = r} width="800px" height="500px"></div>
+				{content && content.map(({name,body},idx) => (
+					<div className="ui grid" key={idx}>
 						<div className="eight wide column">
 							<Post title={name} content={body} />
 						</div>
 					</div>
 				))}
-				{accounts && accounts.map(({name,body}) => (
-					<div className="ui grid">
+				{accounts && accounts.map(({name,body},idx) => (
+					<div className="ui grid" key={idx}>
 						<div className="eight wide column">
 							<Post title={name} content={body} />
 						</div>
