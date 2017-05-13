@@ -22,3 +22,23 @@ POST http://localhost:5000/analyze_this
 
 # Retrieve the most recent entries in the Streemit RSS feed with sentiment analysis data
 GET http://localhost:5000/most_recent
+
+Sample Reponse:
+[
+  [
+    {
+      "sentiment": {
+        "compound": -0.9153, 
+        "neg": 0.077, 
+        "neu": 0.923, 
+        "pos": 0.0
+      }, 
+      "summary_detail": "i want your skulls, i need your skulls,i want your skulls, i need your skulls", 
+      "title": "Mason's Haikus"
+    }
+  ],
+  ...,
+  [
+    ...
+  ]
+]
