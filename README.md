@@ -11,7 +11,7 @@
 Steps to setup environment
 ```pip install -r requirements.txt```
 
-GNAT API documentation:
+# GNAT API documentation:
 
 ## Perform sentiment analysis on an arbitrary set of text data
 ```
