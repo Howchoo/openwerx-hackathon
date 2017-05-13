@@ -59,7 +59,7 @@ var app = (function () {
                 pointRadius: 1,
                 pointHitRadius: 10,
                 data: [0.5, 0.2, -0.5, -0.74, -0.85, -0.5, 0.1],
-                spanGaps: false,
+                spanGaps: false
             }
         ]
     };
