@@ -545,6 +545,21 @@ h1:first-child {
 .footer {
   text-align: center; }
 
+.post__content {
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 1em; }
+  .post__content--truncated {
+    max-height: 24em; }
+    .post__content--truncated:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 25%;
+      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff); }
+
 /*!
  * # Semantic UI 2.2.10 - Button
  * http://github.com/semantic-org/semantic-ui/

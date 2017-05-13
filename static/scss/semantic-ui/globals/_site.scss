@@ -185,3 +185,23 @@ h1 {
 .footer {
   text-align: center;
 }
+
+.post {
+  &__content {
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 1em;
+    &--truncated {
+      max-height: 24em;
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        height: 25%;
+        background-image: linear-gradient(to bottom, rgba(255,255,255,0), #fff);
+      }
+    }
+  }
+}

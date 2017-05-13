@@ -49,3 +49,13 @@ $('#networkForm').on('submit', function(e) {
     // refresh the page to get new results
     location.reload();
 });
+
+$('[data-truncate="show"]').on('click', function(e) {
+    var $t = $(this);
+
+    // show full text
+    $t.parent().find('.post__content:first').removeClass('post__content--truncated');
+
+    // remove this button
+    $t.remove();
+});
