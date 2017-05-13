@@ -25,7 +25,6 @@ class Post extends Component {
 						{title} <div className="ui red horizontal label">{lang}</div>
 						<div className="sub header header__link">{url}</div>
 					</h2>
-					<div className="ui divider"></div>
 					<div className="post__content post__content--truncated">
 						{content}
 					</div>
