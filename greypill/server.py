@@ -24,9 +24,9 @@ def analyze_this():
     
     data = []
     for sentence in request.get_json()['sentences']:
-        data.append(analyzer.getSentiment(sentence))
+        data.update(analyzer.getSentiment(sentence))
         
-    return data
+    return jsonify(data)
 
 def construct_json(entry):
     
@@ -34,15 +34,13 @@ def construct_json(entry):
     
     cleaned_summary = BeautifulSoup(entry['summary_detail']['value']).text
     
-    title = {'title': entry['title']}
-    summary = {'summary_detail': cleaned_summary}
-    sentiment = {'sentiment': analyzer.getSentiment(cleaned_summary)}
+    json = [{
+        'title': entry['title'],
+        'summary_detail': cleaned_summary,
+        'sentiment': analyzer.getSentiment(cleaned_summary)
+    }]
     
-    data.append(title)
-    data.append(summary)
-    data.append(sentiment)
-    
-    return data
+    return json
 
 if __name__ == '__main__':
     app.run(debug=True)
