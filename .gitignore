@@ -2,3 +2,5 @@
 .idea
 greypill/config.json
 node_modules/*
+.sass-cache
+*.css.map
