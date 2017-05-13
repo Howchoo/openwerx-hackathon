@@ -1,4 +1,4 @@
-import React from, { Component } 'react'
+import React, { Component } from 'react'
 
 class Post extends Component {
 
@@ -19,6 +19,6 @@ class Post extends Component {
 			</div>
 		)
 	}
-)
+}
 
 export default Post
