@@ -66,16 +66,21 @@ def handle_mastodon_feed():
     else:
         data = []
         for x in range(bucket_size):   
-            with open('temp/bucket.'+str(bucket_index)+'.json', 'r') as f:
+            with open('temp/bucket.'+str(x)+'.json', 'r') as f:
                 status = json.loads(f.read())
                 
             cleaned_status = BeautifulSoup(status['account']['note']).text
+            translated_status = translate(cleaned_status)['data']
+            translated_summary = translated_status['translations'][0]['translatedText']
+            detected_language = translated_status['translations'][0]['detectedSourceLanguage']
+            
             jsondata = [{
                 'data_source': 'mastodon',
                 'created_at': status['created_at'],
                 'title': status['account']['username'],
-                'summary_detail': cleaned_status,
-                'sentiment': analyzer.getSentiment(cleaned_status)
+                'summary_detail': translated_summary,
+                'source_language': detected_language,
+                'sentiment': analyzer.getSentiment(translated_summary)
             }]
             data.append(jsondata)
                 
