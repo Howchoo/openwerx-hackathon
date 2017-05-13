@@ -13,7 +13,7 @@ import TopSearch from './TopSearch'
 import NavigationTabs from './NavigationTabs'
 import TagsTab from './TagsTab'
 import Footer from './Footer'
-import { getMostRecent } from './utils'
+import { getMostRecent, sleep } from './utils'
 
 class App extends Component {
 
@@ -23,7 +23,9 @@ class App extends Component {
 		this.state = {
 			posts: [],
 			allPosts: [],
-			play: false
+			play: false,
+			updateNum: 0,
+			totalPosts: 0
 		}
 	}
 	
@@ -44,41 +46,57 @@ class App extends Component {
 			location.reload();
 		});
 
+		this.getMostRecentData()
+
 	}
 
 	getMostRecentData = () => {
 		// Get most recent posts
-		getMostRecent()
-			.then(({data}) => {
-				
-				const posts = data.map(post => post[0])
-				console.log('The most recent feed', posts)
-				this.setState((prevState) => ({
-					posts,
-					updateNum: ++prevState.updateNum,
-					allPosts: [...posts, ...prevState.allPosts]
-				}))
-			})
+		return new Promise((resolve) => {
+			getMostRecent()
+				.then(({data}) => {
+					
+					const posts = data.map(post => post[0])
+					console.log('The most recent feed', posts)
+					this.setState((prevState) => ({
+						posts: posts.map((p,idx) => ({...p, id: prevState.totalPosts+idx})),
+						updateNum: ++prevState.updateNum,
+						allPosts: [...posts, ...prevState.allPosts].map((p,idx) => ({...p, id: idx})),
+						totalPosts: [...posts, ...prevState.allPosts].length
+					}))
+					console.log('All posts', this.state.allPosts)
+					resolve()
+				})
+		})
+			
 	}
 
-	togglePlay = () => {
-		if(this.state.play === false) {
-			this.setState({ play: true})
-			let i = 3
-			while(i < 0) {
+	updateCount = () => {
+		
+		this.setState({ play: true})
+		this.getMostRecentData()
+		.then(() => this.setState({play: false}))
+
+		/*const self = this
+		let i = 3
+		while(i > 0) {
+			console.log('play', this.state.play)
+			if(this.state.play === true) {
+				console.log('play', this.state.play)
 				setTimeout(() => {
-					this.getMostRecentData()
-				},10000)
-				
-			}
-		} else {
-			this.setState({ play: false})
-		}
+					console.log('play', this.state.play)
+					self.getMostRecentData()
 
+				},1000)
+			}
+			i--
+		}*/
+	
 	}
+	
 
 	render() {
-		const { posts, updateNum } = this.state
+		const { posts, updateNum, play, totalPosts, allPosts } = this.state
 		return (
 			<div className="ui container">
 		  		<div className="ui container site-header">
@@ -96,11 +114,8 @@ class App extends Component {
 	                        <div className="two wide field">
 	                            <label>Live Analysis: </label>
 	                            <div className="ui icon buttons">
-	                                <button className="ui button active">
-	                                    <i className="play icon" onClick={this.togglePlay}></i>
-	                                </button>
 	                                <button className="ui button">
-	                                    <i className="pause icon" onClick={this.togglePlay}></i>
+	                                    {play ? <div className="ui loader"></div> : <i className="play icon" onClick={this.updateCount}></i>}
 	                                </button>
 	                            </div>
 	                        </div>
@@ -111,15 +126,15 @@ class App extends Component {
 					<TopSearch />
 
 					<div className="ui top attached tabular menu">
-						<a className="active item" data-tab="first">Graph</a>
-						<a className="item" data-tab="second">Sentiment Analysis</a>
+						<a className="active item" data-tab="second">Sentiment Analysis</a>
+						<a className="item" data-tab="first">Graph</a>
 						<a className="item" data-tab="third">Tags</a>
 					</div>
-					<div className="ui bottom attached active tab segment" data-tab="first">
+					<SecondTab posts={posts} updateNum={updateNum} totalPosts={totalPosts} allPosts={allPosts}/>
+					<div className="ui bottom attached tab segment" data-tab="first">
 						<span className="ui orange ribbon label">SteemIt</span>
 						@todo graph
 					</div>
-					<SecondTab posts={posts} updateNum={updateNum}/>
 					<TagsTab />
 					<div className="footer">
 						Made with &lt;3 by <a href="https://dkelabs.com/">DKE Labs</a>

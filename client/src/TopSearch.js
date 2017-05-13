@@ -9,6 +9,7 @@ const TopSearch = () => (
 	                        <select className="ui fluid search dropdown" name="network">
 	                            <option value="">- Select Network for Analysis -</option>
 	                            <option value="steemit">SteemIt</option>
+	                            <option value="mastodon">Mastodon</option>
 	                        </select>
 	                    </div>
 	                    <div className="two wide field">

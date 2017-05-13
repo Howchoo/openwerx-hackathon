@@ -1,8 +1,12 @@
 import rssfeedinterface
 import sentimentanalyzer
+<<<<<<< HEAD
 import json
 import requests
 import util
+=======
+import markdown
+>>>>>>> b034d7cd613b4edcdd3b0d60c96e6f3399b1f153
 from BeautifulSoup import BeautifulSoup
 
 from flask import Flask
@@ -25,7 +29,7 @@ def most_recent():
     data = []
     for entry in feed.get_feed_entries():
         data.append(construct_json(entry))
-    
+
     return jsonify(data)
 
 @app.route('/by_tag', methods=['POST'])
@@ -82,13 +86,12 @@ def handle_mastodon_feed():
 
 def construct_json(entry):
     
-    cleaned_summary = BeautifulSoup(entry['summary_detail']['value']).text
+    cleaned_summary = markdown.markdown(BeautifulSoup(entry['summary_detail']['value']).text)
     translation_data = translate(cleaned_summary)['data']
     translated_summary = translation_data['translations'][0]['translatedText']
     detected_language = translation_data['translations'][0]['detectedSourceLanguage']
     
-    print translated_summary
-    print detected_language
+    cleaned_summary = markdown.markdown(BeautifulSoup(entry['summary_detail']['value']).text)
     
     jsondata = [{
         'data_source': 'streemit',
