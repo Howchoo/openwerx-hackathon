@@ -7,11 +7,26 @@ from flask import jsonify
 from flask import request
 app = Flask(__name__)
 
-feed = rssfeedinterface.RssFeedInterface('https://streemian.com/rss/')
+base_feed_url = 'https://streemian.com/rss/'
+feed = rssfeedinterface.RssFeedInterface(base_feed_url)
 analyzer = sentimentanalyzer.SentimentAnalyzer()
 
 @app.route('/most_recent')
 def most_recent():
+    
+    feed.refresh_feed()
+    
+    data = []
+    for entry in feed.get_feed_entries():
+        data.append(construct_json(entry))
+    
+    return jsonify(data)
+
+@app.route('/by_tag', methods=['POST'])
+def by_tag():
+
+    tag = request.get_json()['tag']
+    feed = rssfeedinterface.RssFeedInterface(base_feed_url + tag)
     
     feed.refresh_feed()
     
