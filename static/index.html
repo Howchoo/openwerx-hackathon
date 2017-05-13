@@ -3,25 +3,48 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Grey Pill</title>
+        <title>GNAT - a Grey Network Analysis Tool from DKE</title>
         <link rel="stylesheet" type="text/css" href="css/semantic-ui.css" />
     </head>
     <body>
-        <div id="root">
+        <div class="page" id="root">
+            <div class="ui container site-header">
+                <h2 class="ui header">
+                    <img src="img/logo.png" alt="DKE Grey Pill">
+                    <div class="content">
+                        GNAT
+                        <div class="sub header">Grey Network Analysis Tool</div>
+                    </div>
+                </h2>
+            </div>
             <div class="ui container">
-                <div class="ui big fluid action input">
-                    <input type="text" placeholder="Enter SteemIt URL...">
-                    <div class="ui button">Analyze</div>
-                </div>
+                <form class="ui form network-form" action="#" id="networkForm">
+                    <div class="fields">
+                        <div class="fourteen wide field">
+                            <select class="ui fluid search dropdown" name="network">
+                                <option value="">- Select Network for Analysis -</option>
+                                <option value="steemit">SteemIt</option>
+                            </select>
+                        </div>
+                        <div class="two wide field">
+                            <button type="submit" class="ui green button">Analyze</button>
+                        </div>
+                    </div>
+                </form>
 
                 <!-- start navigation tabs -->
                 <div class="ui top attached tabular menu">
-                    <a class="active item" data-tab="first">Sentiment Analysis</a>
-                    <a class="item" data-tab="third">Graph</a>
+                    <a class="active item" data-tab="first">Graph</a>
+                    <a class="item" data-tab="second">Sentiment Analysis</a>
                 </div>
                 <div class="ui bottom attached active tab segment" data-tab="first">
+                    <span class="ui orange ribbon label">SteemIt</span>
+                    @todo graph
+                </div>
+                <div class="ui bottom attached tab segment" data-tab="second">
                     <div class="ui grid">
                         <div class="eleven wide column">
+                            <span class="ui orange ribbon label">SteemIt</span>
                             <div class="ui text container">
                                 <h1>Analyzing a single post</h1>
                                 <div class="ui divider"></div>
@@ -43,13 +66,11 @@
                                 </div>
                             </div>
                             <canvas id="postSentiment" width="400" height="400"></canvas>
-                            <div class="ui divider"></div>
-                            <h3>Extracted Topics</h3>
+                            <h3>Topics</h3>
                             <span class="ui green label">Signet</span>
                             <span class="ui label">Lorem</span>
                             <span class="ui red label">Ipsum</span>
                             <span class="ui green label">Dolar</span>
-                            <div class="ui divider"></div>
                             <h3>Tags</h3>
                             <span class="ui label">#sometag</span>
                             <span class="ui label">#yolo</span>
@@ -58,12 +79,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="ui bottom attached tab segment" data-tab="second">
-                    @todo graph
-                </div>
                 <!-- end navigation tabs -->
             </div>
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
         <script src="js/static.js"></script>
     </body>

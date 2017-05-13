@@ -34,3 +34,18 @@ var postSentiment = new Chart(ctx,{
         }
     }
 });
+
+/*
+ * Set up tabs
+ */
+$('.menu .item').tab();
+
+/*
+ * Network selection form
+ */
+$('#networkForm').on('submit', function(e) {
+    e.preventDefault();
+
+    // refresh the page to get new results
+    location.reload();
+});
