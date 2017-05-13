@@ -75,7 +75,7 @@ class App extends Component {
 		
 		this.setState({ play: true})
 		this.getMostRecentData()
-		.then(() => this.state({play: false}))
+		.then(() => this.setState({play: false}))
 
 		/*const self = this
 		let i = 3
@@ -112,13 +112,10 @@ class App extends Component {
 						</div>
 	                    <div className="eight wide column right aligned">
 	                        <div className="two wide field">
-	                            <label>Live Analysis: {play ? 'on' : 'off'}</label>
+	                            <label>Live Analysis: </label>
 	                            <div className="ui icon buttons">
 	                                <button className="ui button">
-	                                    <i className="play icon" onClick={this.updateCount}></i>
-	                                </button>
-	                                <button className="ui button">
-	                                    <i className="pause icon" onClick={this.stopPlay}></i>
+	                                    {play ? <div className="ui loader"></div> : <i className="play icon" onClick={this.updateCount}></i>}
 	                                </button>
 	                            </div>
 	                        </div>
