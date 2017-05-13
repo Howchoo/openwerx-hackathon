@@ -65,6 +65,12 @@ class App extends Component {
 						totalPosts: [...posts, ...prevState.allPosts].length
 					}))
 					console.log('All posts', this.state.allPosts)
+
+					/*
+					 * Hide the loading indicator
+					 */
+					$('.loading-icon').hide();
+
 					resolve()
 				})
 		})
