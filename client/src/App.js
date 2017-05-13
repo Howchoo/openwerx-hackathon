@@ -129,15 +129,15 @@ class App extends Component {
 					<TopSearch />
 
 					<div className="ui top attached tabular menu">
-						<a className="active item" data-tab="first">Graph</a>
-						<a className="item" data-tab="second">Sentiment Analysis</a>
+						<a className="active item" data-tab="second">Sentiment Analysis</a>
+						<a className="item" data-tab="first">Graph</a>
 						<a className="item" data-tab="third">Tags</a>
 					</div>
-					<div className="ui bottom attached active tab segment" data-tab="first">
+					<SecondTab posts={posts} updateNum={updateNum} totalPosts={totalPosts} allPosts={allPosts}/>
+					<div className="ui bottom attached tab segment" data-tab="first">
 						<span className="ui orange ribbon label">SteemIt</span>
 						@todo graph
 					</div>
-					<SecondTab posts={posts} updateNum={updateNum} totalPosts={totalPosts} allPosts={allPosts}/>
 					<TagsTab />
 					<div className="footer">
 						Made with &lt;3 by <a href="https://dkelabs.com/">DKE Labs</a>
