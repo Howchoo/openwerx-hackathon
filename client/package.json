@@ -11,6 +11,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-select": "^1.0.0-rc.3",
+    "react-sigma": "^1.2.17",
     "semantic-ui-icon": "^2.2.10"
   },
   "devDependencies": {
