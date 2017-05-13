@@ -10,6 +10,7 @@ const TopSearch = () => (
 	                            <option value="">- Select Network for Analysis -</option>
 	                            <option value="steemit">SteemIt</option>
 	                            <option value="mastodon">Mastodon</option>
+	                            <option value="all">All</option>
 	                        </select>
 	                    </div>
 	                    <div className="two wide field">

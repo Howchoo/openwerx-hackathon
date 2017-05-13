@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react'
 import Select from 'react-select'
-
+import Post from './Post'
 class SteemExplorer extends Component {
 	constructor(props) {
 		super()
@@ -12,7 +12,10 @@ class SteemExplorer extends Component {
 				}
 			},
 			selectedTrend: '',
-			trending: []
+			trending: [],
+			content: [],
+			accounts: []
+
 		}
 	}
 	
@@ -33,6 +36,8 @@ class SteemExplorer extends Component {
 		})
 		steem.api.getState(`/trending/${val.value}`, (err, result) => {
             
+            this.setContentObj(result.content)
+            this.setAccountObj(result.accounts)
             
             console.log(`/trends/${val.value}`, result);
 		})
@@ -41,6 +46,25 @@ class SteemExplorer extends Component {
 	/*getSelectedTrendingTopic() {
 
 	}*/
+	setAccountObj = (obj) => {
+		let arr = []
+	  
+	  $.each(obj, function(k, v) {
+	    arr.push({name: k, body: v.json_metadata})
+	  });
+	  this.setState({accounts: arr})
+	  console.log('accounts arr ', arr)
+	}
+
+	setContentObj = (obj) => {
+		let arr = []
+	  
+	  $.each(obj, function(k, v) {
+	    arr.push({name: k, body: v.body})
+	  });
+	  this.setState({content: arr})
+	  console.log('accounts arr ', arr)
+	}
 
 	mapOptions = (vals) => {
 		console.log('Trending', vals)
@@ -48,8 +72,9 @@ class SteemExplorer extends Component {
 	}
 
 	render() {
-		const { trending, selectedTrend } = this.state
-
+		const { trending, selectedTrend, accounts, content } = this.state
+		console.log('accounts', accounts)
+		console.log('content', content)
 		const trendingOptions = this.mapOptions(trending)
 		return (
 			<div>
@@ -60,6 +85,16 @@ class SteemExplorer extends Component {
 					options={trendingOptions}
 					onChange={this.handleTrendingSelect}
 				/>
+				{content && content.map(({name,body}) => (
+					<div className="ui grid">
+						<Post title={name} content={body} />
+					</div>
+				))}
+				{accounts && accounts.map(({name,body}) => (
+					<div className="ui grid">
+						<Post title={name} content={body} />
+					</div>
+				))}
 			</div>
 		)
 	}

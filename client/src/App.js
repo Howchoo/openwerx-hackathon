@@ -136,7 +136,7 @@ class App extends Component {
 						<a className="item" data-tab="first">Graph</a>
 						<a className="item" data-tab="third">Tags</a>
 					</div>
-					<SecondTab posts={posts} updateNum={updateNum} totalPosts={totalPosts} allPosts={allPosts}/>
+					<SecondTab posts={posts} updateNum={updateNum} totalPosts={totalPosts} allPosts={allPosts} />
 					<div className="ui bottom attached tab segment" data-tab="first">
 						<span className="ui orange ribbon label">SteemIt</span>
 						@todo graph
