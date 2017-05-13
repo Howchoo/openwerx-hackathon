@@ -3,7 +3,7 @@
 
 Dependencies
 - Python 2.7
-- NLTK (http://www.nltk.org/install.html)
-- Scrapy (https://scrapy.org/)
-- BeautifulSoup (https://www.crummy.com/software/BeautifulSoup/)
-- Mastadon.py (http://mastodonpy.readthedocs.io/en/latest/)
+- [NLTK](http://www.nltk.org/install.html)
+- [Scrapy](https://scrapy.org/)
+- [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/)
+- [Mastadon.py](http://mastodonpy.readthedocs.io/en/latest/)
