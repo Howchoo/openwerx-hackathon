@@ -22,37 +22,11 @@ class App extends Component {
 
 		this.state = {
 			posts: [],
-			postSentiment: {
-				data: {
-					labels: [
-						"Positive",
-						"Neutral",
-						"Negative"
-					],
-					datasets: [{
-						data: [0.274, 0.095, 0.631],
-						backgroundColor: [
-							"#4CAF50",
-							"#FFC107",
-							"#F44336"
-						],
-						hoverBackgroundColor: [
-							"#43A047",
-							"#FFB300",
-							"#E53935"
-						]
-					}]
-				}
-			}
+			
 		}
 	}
 	
 	componentDidMount() {
-		let labels = []
-		let newData = []
-		 
-
-		const ctx = document.getElementById('postSentiment');
 
 		/*
 		 * Set up tabs
@@ -69,18 +43,6 @@ class App extends Component {
 			location.reload();
 		});
 
-		/*
-		 * Show full post
-		 */
-		$('[data-truncate="show"]').on('click', function(e) {
-		    var $t = $(this);
-
-		    // show full text
-		    $t.parent().find('.post__content:first').removeClass('post__content--truncated');
-
-		    // remove this button
-		    $t.remove();
-		});
 
 		// Get most recent posts
 		getMostRecent()

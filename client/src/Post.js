@@ -2,6 +2,15 @@ import React, { Component } from 'react'
 
 class Post extends Component {
 
+	toggleShow = () => {
+
+		    // show full text
+		    $(this.toggleRef).parent().find('.post__content:first').removeClass('post__content--truncated');
+
+		    // remove this button
+		    $(this.toggleRef).remove();
+	}
+
 	render() {
 		const { title, content } = this.props
 		return (
@@ -14,7 +23,14 @@ class Post extends Component {
 					<div className="post__content post__content--truncated">
 						{content}
 					</div>
-					<button className="ui button" data-truncate="show">Show all</button>
+					<button 
+						className="ui button"
+						data-truncate="show"
+						ref={(r) => this.toggleRef = r}
+						onClick={this.toggleShow}
+					>
+							Show all
+					</button>
 				</div>
 			</div>
 		)
