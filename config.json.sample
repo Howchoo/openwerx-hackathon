@@ -1,0 +1,6 @@
+{
+    "mastodonClientName": "mastodon_client_name",
+    "mastodonEmail": "mastodon_email",
+    "mastodonPassword": "mastodon_password",
+    "googleTranslateApiKey": "google_translate_api_key"
+}

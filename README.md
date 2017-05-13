@@ -30,6 +30,9 @@ import nltk
 nltk.download()
 ```
 
+## Update config file
+Rename `config.json.sample` to `config.json` and update with your own values.
+
 ## Retrieve the most recent entries in the Streemit RSS feed with sentiment analysis data
 ```GET http://localhost:5000/most_recent```
 
