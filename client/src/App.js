@@ -79,15 +79,7 @@ class App extends Component {
 			location.reload();
 		});
 
-		$('[data-truncate="show"]').on('click', function(e) {
-			var $t = $(this);
-
-			// show full text
-			$t.parent().find('.post__content:first').removeClass('post__content--truncated');
-
-			// remove this button
-			$t.remove();
-		});
+		
 
 		// Get most recent posts
 		getMostRecent()
@@ -95,7 +87,9 @@ class App extends Component {
 				
 				const posts = data.map(post => post[0])
 				console.log('The most recent feed', posts)
-				this.setState({posts})
+				this.setState({
+					posts
+				})
 			})
 	}
 	render() {
