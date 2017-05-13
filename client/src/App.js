@@ -13,7 +13,7 @@ import TopSearch from './TopSearch'
 import NavigationTabs from './NavigationTabs'
 import TagsTab from './TagsTab'
 import Footer from './Footer'
-import { getMostRecent } from './utils'
+import { getMostRecent, sleep } from './utils'
 
 class App extends Component {
 
@@ -23,7 +23,9 @@ class App extends Component {
 		this.state = {
 			posts: [],
 			allPosts: [],
-			play: false
+			play: false,
+			updateNum: 0,
+			totalPosts: 0
 		}
 	}
 	
@@ -48,37 +50,68 @@ class App extends Component {
 
 	getMostRecentData = () => {
 		// Get most recent posts
-		getMostRecent()
-			.then(({data}) => {
-				
-				const posts = data.map(post => post[0])
-				console.log('The most recent feed', posts)
-				this.setState((prevState) => ({
-					posts,
-					updateNum: ++prevState.updateNum,
-					allPosts: [...posts, ...prevState.allPosts]
-				}))
-			})
+		return new Promise((resolve) => {
+			getMostRecent()
+				.then(({data}) => {
+					
+					const posts = data.map(post => post[0])
+					console.log('The most recent feed', posts)
+					this.setState((prevState) => ({
+						posts,
+						updateNum: ++prevState.updateNum,
+						allPosts: [...posts, ...prevState.allPosts].map((p,idx) => ({...p, id: idx})),
+						totalPosts: [...posts, ...prevState.allPosts].length
+					}))
+					console.log('All posts', this.state.allPosts)
+					resolve()
+				})
+		})
+			
 	}
 
-	togglePlay = () => {
-		if(this.state.play === false) {
-			this.setState({ play: true})
-			let i = 3
-			while(i < 0) {
+	startPlay = () => {
+		
+		this.setState({ play: true})
+		this.getMostRecentData()
+		.then(() => {
+			sleep(7000)
+			return this.getMostRecentData()
+		})
+		.then(() => {
+			sleep(5000)
+			return this.getMostRecentData()
+		})
+		.then(() => {
+			sleep(5000)
+			return this.getMostRecentData()
+		})
+		.then(() => {
+			sleep(5000)
+			return this.getMostRecentData()
+		})
+		
+		/*const self = this
+		let i = 3
+		while(i > 0) {
+			console.log('play', this.state.play)
+			if(this.state.play === true) {
+				console.log('play', this.state.play)
 				setTimeout(() => {
-					this.getMostRecentData()
-				},10000)
-				
-			}
-		} else {
-			this.setState({ play: false})
-		}
+					console.log('play', this.state.play)
+					self.getMostRecentData()
 
+				},1000)
+			}
+			i--
+		}*/
+	
+	}
+	stopPlay = () => {
+		this.setState({ play: false})
 	}
 
 	render() {
-		const { posts, updateNum } = this.state
+		const { posts, updateNum, play, totalPosts, allPosts } = this.state
 		return (
 			<div className="ui container">
 		  		<div className="ui container site-header">
@@ -94,13 +127,13 @@ class App extends Component {
 						</div>
 	                    <div className="eight wide column right aligned">
 	                        <div className="two wide field">
-	                            <label>Live Analysis: </label>
+	                            <label>Live Analysis: {play ? 'on' : 'off'}</label>
 	                            <div className="ui icon buttons">
 	                                <button className="ui button active">
-	                                    <i className="play icon" onClick={this.togglePlay}></i>
+	                                    <i className="play icon" onClick={this.startPlay}></i>
 	                                </button>
 	                                <button className="ui button">
-	                                    <i className="pause icon" onClick={this.togglePlay}></i>
+	                                    <i className="pause icon" onClick={this.stopPlay}></i>
 	                                </button>
 	                            </div>
 	                        </div>
@@ -119,7 +152,7 @@ class App extends Component {
 						<span className="ui orange ribbon label">SteemIt</span>
 						@todo graph
 					</div>
-					<SecondTab posts={posts} updateNum={updateNum}/>
+					<SecondTab posts={posts} updateNum={updateNum} totalPosts={totalPosts} allPosts={allPosts}/>
 					<TagsTab />
 					<div className="footer">
 						Made with &lt;3 by <a href="https://dkelabs.com/">DKE Labs</a>
