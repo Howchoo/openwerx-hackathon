@@ -1,5 +1,6 @@
 import React from 'react'
 import Post from './Post'
+import SteemExplorer from './SteemExplorer'
 
 const TagsTab = () => {
 	const placeholder = (
@@ -12,6 +13,7 @@ const TagsTab = () => {
 	)
 	return (
 		<div className="ui bottom attached tab segment" data-tab="third">
+			<SteemExplorer style={{width: '200px'}} />
 			<div className="ui grid">
 				<Post title='Tags tab Post Title' content={placeholder} />
 				
