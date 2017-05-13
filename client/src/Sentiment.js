@@ -1,32 +1,42 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
+import ChartComponent from './ChartComponent'
 
 class Sentiment extends Component {
 
 	constructor(props) {
 		super(props)
+		const { neg, pos } = props.post.sentiment
+		const overallSentiment = parseFloat(pos) - parseFloat(neg)
+		const isNegative = (Math.sign(overallSentiment) === -1) ? true : false
+		console.log('isNegative', isNegative)
+		this.state = {
+			overallSentiment,
+			isNegative
+		}
 	}
 
 	render() {
-		const {} = this.props
+		const {post, updateNum} = this.props
+		const { overallSentiment, isNegative } = this.state
 		return (
 			<div className="five wide column">
 				<h3>Sentiment</h3>
 				<div className="ui statistics">
 					<div className="red statistic center">
 						<div className="value">
-							-0.5461
+							{overallSentiment.toFixed(3)}
 						</div>
 						<div className="label">
-							Negative
+							{isNegative ? 'Negative' : 'Positive'}
 						</div>
 					</div>
 				</div>
-				<canvas id="postSentiment" width="400" height="400"></canvas>
+				<ChartComponent post={post} updateNum={updateNum} />
 				<h3>Topics</h3>
 				<span className="ui green label">Signet</span>
 				<span className="ui label">Lorem</span>
-				<span className="ui red label">Ipsum</span>
+				<span className={classNames('ui', 'red', 'label')}>Ipsum</span>
 				<span className="ui green label">Dolar</span>
 				<h3>Tags</h3>
 				<span className="ui label">#sometag</span>
