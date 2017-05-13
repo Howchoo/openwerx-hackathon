@@ -22,47 +22,12 @@ class App extends Component {
 
 		this.state = {
 			posts: [],
-			postSentiment: {
-				data: {
-					labels: [
-						"Positive",
-						"Neutral",
-						"Negative"
-					],
-					datasets: [{
-						data: [0.274, 0.095, 0.631],
-						backgroundColor: [
-							"#4CAF50",
-							"#FFC107",
-							"#F44336"
-						],
-						hoverBackgroundColor: [
-							"#43A047",
-							"#FFB300",
-							"#E53935"
-						]
-					}]
-				}
-			}
+			allPosts: [],
+			play: false
 		}
 	}
 	
 	componentDidMount() {
-		let labels = []
-		let newData = []
-		
-
-		const ctx = document.getElementById('postSentiment');
-
-		const postSentiment = new Chart(ctx,{
-			type: 'doughnut',
-			data: this.state.postSentiment.data,
-			options: {
-				legend: {
-					position: 'bottom'
-				}
-			}
-		});
 
 		/*
 		 * Set up tabs
@@ -79,21 +44,41 @@ class App extends Component {
 			location.reload();
 		});
 
-		
+	}
 
+	getMostRecentData = () => {
 		// Get most recent posts
 		getMostRecent()
 			.then(({data}) => {
 				
 				const posts = data.map(post => post[0])
 				console.log('The most recent feed', posts)
-				this.setState({
-					posts
-				})
+				this.setState((prevState) => ({
+					posts,
+					updateNum: ++prevState.updateNum,
+					allPosts: [...posts, ...prevState.allPosts]
+				}))
 			})
 	}
+
+	togglePlay = () => {
+		if(this.state.play === false) {
+			this.setState({ play: true})
+			let i = 3
+			while(i < 0) {
+				setTimeout(() => {
+					this.getMostRecentData()
+				},10000)
+				
+			}
+		} else {
+			this.setState({ play: false})
+		}
+
+	}
+
 	render() {
-		const { posts } = this.state
+		const { posts, updateNum } = this.state
 		return (
 			<div className="ui container">
 		  		<div className="ui container site-header">
@@ -109,13 +94,13 @@ class App extends Component {
 						</div>
 	                    <div className="eight wide column right aligned">
 	                        <div className="two wide field">
-	                            <label>Live Analysis:</label>
+	                            <label>Live Analysis: </label>
 	                            <div className="ui icon buttons">
 	                                <button className="ui button active">
-	                                    <i className="play icon"></i>
+	                                    <i className="play icon" onClick={this.togglePlay}></i>
 	                                </button>
 	                                <button className="ui button">
-	                                    <i className="pause icon"></i>
+	                                    <i className="pause icon" onClick={this.togglePlay}></i>
 	                                </button>
 	                            </div>
 	                        </div>
@@ -134,7 +119,7 @@ class App extends Component {
 						<span className="ui orange ribbon label">SteemIt</span>
 						@todo graph
 					</div>
-					<SecondTab posts={posts} />
+					<SecondTab posts={posts} updateNum={updateNum}/>
 					<TagsTab />
 					<div className="footer">
 						Made with &lt;3 by <a href="https://dkelabs.com/">DKE Labs</a>
