@@ -9,30 +9,62 @@
     <body>
         <div id="root">
             <div class="ui container">
+                <div class="ui big fluid action input">
+                    <input type="text" placeholder="Enter SteemIt URL...">
+                    <div class="ui button">Analyze</div>
+                </div>
+
                 <!-- start navigation tabs -->
                 <div class="ui top attached tabular menu">
-                    <a class="active item" data-tab="first">SteemIt</a>
-                    <a class="item" data-tab="second">Mastadon</a>
-                    <a class="item" data-tab="third">ZeroMe</a>
-                    <a class="item" data-tab="fourth">IPFS</a>
+                    <a class="active item" data-tab="first">Sentiment Analysis</a>
+                    <a class="item" data-tab="third">Graph</a>
                 </div>
                 <div class="ui bottom attached active tab segment" data-tab="first">
-                    <div class="ui big fluid action input">
-                        <input type="text" placeholder="Enter SteemIt URL...">
-                        <div class="ui button">Analyze</div>
+                    <div class="ui grid">
+                        <div class="eleven wide column">
+                            <div class="ui text container">
+                                <h1>Analyzing a single post</h1>
+                                <div class="ui divider"></div>
+                                <h2>This is some post title</h2>
+                                <p>Domestic dogs inherited complex behaviors, such as bite inhibition, from their wolf ancestors, which would have been pack hunters with complex body language. These sophisticated forms of social cognition and communication may account for their trainability, playfulness, and ability to fit into human households and social situations, and these attributes have given dogs a relationship with humans that has enabled them to become one of the most successful species on the planet today.</p>
+                                <p>The dogs' value to early human hunter-gatherers led to them quickly becoming ubiquitous across world cultures. Dogs perform many roles for people, such as hunting, herding, pulling loads, protection, assisting police and military, companionship, and, more recently, aiding handicapped individuals. This impact on human society has given them the nickname "man's best friend" in the Western world. In some cultures, however, dogs are also a source of meat.</p>
+                            </div>
+                        </div>
+                        <div class="five wide column">
+                            <h3>Sentiment</h3>
+                            <div class="ui statistics">
+                                <div class="red statistic center">
+                                    <div class="value">
+                                        -0.5461
+                                    </div>
+                                    <div class="label">
+                                        Negative
+                                    </div>
+                                </div>
+                            </div>
+                            <canvas id="postSentiment" width="400" height="400"></canvas>
+                            <div class="ui divider"></div>
+                            <h3>Extracted Topics</h3>
+                            <span class="ui green label">Signet</span>
+                            <span class="ui label">Lorem</span>
+                            <span class="ui red label">Ipsum</span>
+                            <span class="ui green label">Dolar</span>
+                            <div class="ui divider"></div>
+                            <h3>Tags</h3>
+                            <span class="ui label">#sometag</span>
+                            <span class="ui label">#yolo</span>
+                            <span class="ui red label">#something</span>
+                            <span class="ui green label">#troloo</span>
+                        </div>
                     </div>
                 </div>
                 <div class="ui bottom attached tab segment" data-tab="second">
-                    Second
-                </div>
-                <div class="ui bottom attached tab segment" data-tab="third">
-                    Third
-                </div>
-                <div class="ui bottom attached tab segment" data-tab="fourth">
-                    Fourth
+                    @todo graph
                 </div>
                 <!-- end navigation tabs -->
             </div>
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
+        <script src="js/static.js"></script>
     </body>
 </html>
