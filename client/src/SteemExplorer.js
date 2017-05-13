@@ -72,6 +72,7 @@ class SteemExplorer extends Component {
 		let nodes = []
 		let edges = []
 		let s = new sigma('neuralNet')
+		let n = 0
 		$.each(obj.accounts, (k, v) => {
 			nodes.push({
 				id: `${v.id}`,
@@ -80,13 +81,25 @@ class SteemExplorer extends Component {
 				y: v.posting_rewards,
 				size: v.voting_power
 			})
-			s.graph.addNode({
-				id: `${v.id}`,
-				label: v.name,
-				x: v.post_count,
-				y: v.posting_rewards,
-				size: v.voting_power
-			})
+			if(n%2 ===0) {
+				s.graph.addNode({
+					id: `${v.id}`,
+					label: v.name,
+					x: v.posting_rewards,
+					y: v.post_count,
+					size: v.voting_power
+				})
+			} else {
+				s.graph.addNode({
+					id: `${v.id}`,
+					label: v.name,
+					x: v.post_count,
+					y: v.posting_rewards,
+					size: v.voting_power
+				})
+			}
+			n++
+			
 		})
 
 		console.log('accounts for neural net', nodes)
