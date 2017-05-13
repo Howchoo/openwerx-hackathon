@@ -97,13 +97,30 @@ class App extends Component {
 		return (
 			<div className="ui container">
 		  		<div className="ui container site-header">
-					<h2 className="ui header">
-						{/*<img src="img/logo.png" alt="DKE Grey Pill">*/}
-						<div className="content">
-							GNAT
-							<div className="sub header">Grey Network Analysis Tool</div>
+	                <div className="ui grid">
+	                    <div className="eight wide column">
+							<h2 className="ui header">
+								{/*<img src="img/logo.png" alt="DKE Grey Pill">*/}
+								<div className="content">
+									GNAT
+									<div className="sub header">Grey Network Analysis Tool</div>
+								</div>
+							</h2>
 						</div>
-					</h2>
+	                    <div className="eight wide column right aligned">
+	                        <div className="two wide field">
+	                            <label>Live Analysis:</label>
+	                            <div className="ui icon buttons">
+	                                <button className="ui button active">
+	                                    <i className="play icon"></i>
+	                                </button>
+	                                <button className="ui button">
+	                                    <i className="pause icon"></i>
+	                                </button>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
 				</div>
 				<div className="ui container">
 					<TopSearch />
