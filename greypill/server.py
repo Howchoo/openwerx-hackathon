@@ -5,7 +5,10 @@ from BeautifulSoup import BeautifulSoup
 from flask import Flask
 from flask import jsonify
 from flask import request
+from flask_cors import CORS, cross_origin
+
 app = Flask(__name__)
+CORS(app)
 
 base_feed_url = 'https://streemian.com/rss/'
 feed = rssfeedinterface.RssFeedInterface(base_feed_url)
