@@ -1,5 +1,4 @@
 import feedparser
-from bs4 import BeautifulSoup
 
 
 class RssFeedInterface():
@@ -53,4 +52,4 @@ if __name__ == '__main__':
     feed = RssFeedInterface('https://streemian.com/rss/')
     print feed.get_single_entry(0)['title']
     print feed.get_feed_titles()
-    print len(feed.get_range_entries(0,9))
+    print feed.get_range_entries(0,9)
