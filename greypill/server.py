@@ -84,6 +84,7 @@ def handle_mastodon_feed():
                 'data_source': 'mastodon',
                 'created_at': status['created_at'],
                 'title': status['account']['username'],
+                'url': status['account']['url'],
                 'summary_detail': summary,
                 'source_language': detected_language,
                 'sentiment': analyzer.getSentiment(summary)
@@ -104,11 +105,14 @@ def construct_json(entry):
     except Exception as e:
         summary = cleaned_summary
         detected_language = 'translation_failed'
+        
+    print entry
     
     jsondata = [{
         'data_source': 'streemit',
         'created_at': entry['published'],
         'title': entry['title'],
+        'url': entry['link'],
         'summary_detail': summary,
         'source_language': detected_language,
         'sentiment': analyzer.getSentiment(summary)
