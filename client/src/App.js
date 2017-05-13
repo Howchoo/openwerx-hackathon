@@ -46,6 +46,8 @@ class App extends Component {
 			location.reload();
 		});
 
+		this.getMostRecentData()
+
 	}
 
 	getMostRecentData = () => {
@@ -73,8 +75,8 @@ class App extends Component {
 		
 		this.setState({ play: true})
 		this.getMostRecentData()
-		
-		
+		.then(() => this.state({play: false}))
+
 		/*const self = this
 		let i = 3
 		while(i > 0) {
@@ -91,9 +93,7 @@ class App extends Component {
 		}*/
 	
 	}
-	stopPlay = () => {
-		this.setState({ play: false})
-	}
+	
 
 	render() {
 		const { posts, updateNum, play, totalPosts, allPosts } = this.state
