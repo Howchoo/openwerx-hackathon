@@ -10,3 +10,15 @@ Dependencies
 
 Steps to setup environment
 pip install -r requirements.txt
+
+GNAT API documentation:
+
+# Perform sentiment analysis on an arbitrary set of text data
+POST http://localhost:5000/analyze_this
+"Content-Type: application/json"
+{
+    "sentences":["Time to go west", ... , "There's not reason this won't work"]
+}
+
+# Retrieve the most recent entries in the Streemit RSS feed with sentiment analysis data
+GET http://localhost:5000/most_recent
