@@ -23,9 +23,9 @@ class Sentiment extends Component {
 			<div className="five wide column">
 				<h3>Sentiment</h3>
 				<div className="ui statistics">
-					<div className="red statistic center">
+					<div className={classNames({ red: isNegative},{green: !isNegative},'statistic','corner')}>
 						<div className="value">
-							{overallSentiment.toFixed(3)}
+							{isNegative ? '' : '+'}{overallSentiment.toFixed(3)}
 						</div>
 						<div className="label">
 							{isNegative ? 'Negative' : 'Positive'}
