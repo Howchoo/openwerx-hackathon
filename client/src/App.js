@@ -50,7 +50,7 @@ class App extends Component {
 	componentDidMount() {
 		let labels = []
 		let newData = []
-		
+		 
 
 		const ctx = document.getElementById('postSentiment');
 
@@ -69,7 +69,18 @@ class App extends Component {
 			location.reload();
 		});
 
-		
+		/*
+		 * Show full post
+		 */
+		$('[data-truncate="show"]').on('click', function(e) {
+		    var $t = $(this);
+
+		    // show full text
+		    $t.parent().find('.post__content:first').removeClass('post__content--truncated');
+
+		    // remove this button
+		    $t.remove();
+		});
 
 		// Get most recent posts
 		getMostRecent()
