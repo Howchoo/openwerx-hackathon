@@ -11,7 +11,7 @@
 Steps to setup environment
 ```pip install -r requirements.txt```
 
-# GNAT API documentation:
+# GNAT API documentation
 
 ## Perform sentiment analysis on an arbitrary set of text data
 ```
@@ -20,6 +20,14 @@ POST http://localhost:5000/analyze_this
 {
     "sentences":["Time to go west", ... , "There's not reason this won't work"]
 }
+```
+
+## Obtaining initial nltk data
+```
+cd ~/project-folder/greypill
+python
+import nltk
+nltk.download()
 ```
 
 ## Retrieve the most recent entries in the Streemit RSS feed with sentiment analysis data
