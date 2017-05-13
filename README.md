@@ -1,5 +1,5 @@
-# openwerx-hackathon
-5/12 Hacking cool things and being 1337
+# GNAT: Grey Network Analysis Tool
+DKE's entry in the [Grey Pill OPENWERX hackathon](http://www.hackathon.io/openwerx-data1), GNAT is a scalable, modular tool for monitoring grey social networks, performing sentament analysis and more.
 
 ## Dependencies
 - Python 2.7
