@@ -69,18 +69,24 @@ def handle_mastodon_feed():
             with open('temp/bucket.'+str(x)+'.json', 'r') as f:
                 status = json.loads(f.read())
                 
-            cleaned_status = BeautifulSoup(status['account']['note']).text
-            translated_status = translate(cleaned_status)['data']
-            translated_summary = translated_status['translations'][0]['translatedText']
-            detected_language = translated_status['translations'][0]['detectedSourceLanguage']
+            cleaned_summary = BeautifulSoup(status['account']['note']).text
+            summary = cleaned_summary
+            try:
+                translated_status = translate(cleaned_summary).json()['data']
+                translated_summary = translated_status['translations'][0]['translatedText']
+                detected_language = translated_status['translations'][0]['detectedSourceLanguage']
+                summary = translated_summary
+            except Exception as e:
+                summary = cleaned_summary
+                detected_language = 'translation_failed'
             
             jsondata = [{
                 'data_source': 'mastodon',
                 'created_at': status['created_at'],
                 'title': status['account']['username'],
-                'summary_detail': translated_summary,
+                'summary_detail': summary,
                 'source_language': detected_language,
-                'sentiment': analyzer.getSentiment(translated_summary)
+                'sentiment': analyzer.getSentiment(summary)
             }]
             data.append(jsondata)
                 
@@ -89,19 +95,23 @@ def handle_mastodon_feed():
 def construct_json(entry):
     
     cleaned_summary = markdown.markdown(BeautifulSoup(entry['summary_detail']['value']).text)
-    translation_data = translate(cleaned_summary)['data']
-    translated_summary = translation_data['translations'][0]['translatedText']
-    detected_language = translation_data['translations'][0]['detectedSourceLanguage']
-    
-    cleaned_summary = markdown.markdown(BeautifulSoup(entry['summary_detail']['value']).text)
+    summary = cleaned_summary
+    try:
+        translation_data = translate(cleaned_summary).json()['data']
+        translated_summary = translation_data['translations'][0]['translatedText']
+        detected_language = translation_data['translations'][0]['detectedSourceLanguage']
+        summary = translated_summary
+    except Exception as e:
+        summary = cleaned_summary
+        detected_language = 'translation_failed'
     
     jsondata = [{
         'data_source': 'streemit',
         'created_at': entry['published'],
         'title': entry['title'],
-        'summary_detail': translated_summary,
+        'summary_detail': summary,
         'source_language': detected_language,
-        'sentiment': analyzer.getSentiment(translated_summary)
+        'sentiment': analyzer.getSentiment(summary)
     }]
     
     return jsondata
@@ -129,7 +139,7 @@ def get_bucket_index():
 def translate(paragraph, lang='en'):
     key = util.get_config_value('googleTranslateApiKey')
     r = requests.get('https://www.googleapis.com/language/translate/v2', params={'target': lang, 'key': key, 'q': paragraph, 'format': 'text'})
-    return r.json()
+    return r
 
 if __name__ == '__main__':
     app.run(debug=True)
