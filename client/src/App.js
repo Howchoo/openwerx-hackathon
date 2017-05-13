@@ -100,7 +100,7 @@ class App extends Component {
 						</div>
 	                    <div className="eight wide column right aligned">
 	                        <div className="two wide field">
-	                            <label>Live Analysis:</label>
+	                            <label>Live Analysis: </label>
 	                            <div className="ui icon buttons">
 	                                <button className="ui button active">
 	                                    <i className="play icon"></i>

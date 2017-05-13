@@ -10,7 +10,8 @@
     "moment": "^2.18.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-select": "^1.0.0-rc.3"
+    "react-select": "^1.0.0-rc.3",
+    "semantic-ui-icon": "^2.2.10"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"
