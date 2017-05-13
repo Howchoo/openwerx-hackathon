@@ -564,6 +564,9 @@ h1:first-child {
   min-height: 7.5em;
   position: relative !important; }
 
+.header__link {
+  overflow-x: auto; }
+
 /*!
  * # Semantic UI 2.2.10 - Button
  * http://github.com/semantic-org/semantic-ui/

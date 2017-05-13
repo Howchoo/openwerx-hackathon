@@ -19,12 +19,12 @@ class ChartComponent extends Component {
 						data: newData,
 						backgroundColor: [
 							"#4CAF50",
-							"#FFC107",
+							"#E8E8E8",
 							"#F44336"
 						],
 						hoverBackgroundColor: [
 							"#43A047",
-							"#FFB300",
+							"#E0E0E0",
 							"#E53935"
 						]
 					}]

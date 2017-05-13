@@ -14,14 +14,17 @@ class Post extends Component {
 	}
 
 	render() {
-		const { title, content, id } = this.props
+		const { title, content, id, url } = this.props
 		return (
 			<div className="eleven wide column">
 				<span className="ui orange ribbon label">SteemIt {id}</span>
 				<div className="ui text container">
 					<h1>Analyzing post {id}</h1>
 					<div className="ui divider"></div>
-					<h2>{title}</h2>
+					<h2 className="ui header">
+						{title}
+						<div className="sub header header__link">{url}</div>
+					</h2>
 					<div className="post__content post__content--truncated">
 						{content}
 					</div>
