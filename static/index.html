@@ -9,15 +9,30 @@
     <body>
         <div class="page" id="root">
             <div class="ui container site-header">
-                <h2 class="ui header">
-                    <img src="img/logo.png" alt="DKE Grey Pill">
-                    <div class="content">
-                        GNAT
-                        <div class="sub header">Grey Network Analysis Tool</div>
+                <div class="ui grid">
+                    <div class="eight wide column">
+                        <h2 class="ui header">
+                            <img src="img/logo.png" alt="DKE Grey Pill">
+                            <div class="content">
+                                GNAT
+                                <div class="sub header">Grey Network Analysis Tool</div>
+                            </div>
+                        </h2>
                     </div>
-                </h2>
-            </div>
-            <div class="ui container">
+                    <div class="eight wide column right aligned">
+                        <div class="two wide field">
+                            <labeL>Live Analysis:</labeL>
+                            <div class="ui icon buttons">
+                                <button class="ui button active">
+                                    <i class="play icon"></i>
+                                </button>
+                                <button class="ui button">
+                                    <i class="pause icon"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="ui grid">
                     <div class="eight wide column">
                         <form class="ui form network-form" action="#" id="networkForm">
