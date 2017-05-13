@@ -77,6 +77,7 @@ def handle_mastodon_feed():
                 detected_language = translated_status['translations'][0]['detectedSourceLanguage']
                 summary = translated_summary
             except Exception as e:
+                print e
                 summary = cleaned_summary
                 detected_language = 'translation_failed'
             
@@ -87,7 +88,8 @@ def handle_mastodon_feed():
                 'url': status['account']['url'],
                 'summary_detail': summary,
                 'source_language': detected_language,
-                'sentiment': analyzer.getSentiment(summary)
+                'sentiment': analyzer.getSentiment(summary),
+                'generated_tags': analyzer.generateTags(summary, num_tags=2, weight=1)
             }]
             data.append(jsondata)
                 
@@ -103,10 +105,9 @@ def construct_json(entry):
         detected_language = translation_data['translations'][0]['detectedSourceLanguage']
         summary = translated_summary
     except Exception as e:
+        print e
         summary = cleaned_summary
         detected_language = 'translation_failed'
-        
-    print entry
     
     jsondata = [{
         'data_source': 'streemit',
@@ -115,7 +116,8 @@ def construct_json(entry):
         'url': entry['link'],
         'summary_detail': summary,
         'source_language': detected_language,
-        'sentiment': analyzer.getSentiment(summary)
+        'sentiment': analyzer.getSentiment(summary),
+        'generated_tags': analyzer.generateTags(summary)
     }]
     
     return jsondata
@@ -143,6 +145,7 @@ def get_bucket_index():
 def translate(paragraph, lang='en'):
     key = util.get_config_value('googleTranslateApiKey')
     r = requests.get('https://www.googleapis.com/language/translate/v2', params={'target': lang, 'key': key, 'q': paragraph, 'format': 'text'})
+    #print r.status_code
     return r
 
 if __name__ == '__main__':

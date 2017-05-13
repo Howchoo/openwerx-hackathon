@@ -9,7 +9,18 @@
 - [Mastadon.py](http://mastodonpy.readthedocs.io/en/latest/)
 
 Steps to setup environment
-```pip install -r requirements.txt```
+```pip install -r requirements.txt`
+
+curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+sudo apt-get install -y nodejs git python-pip exiftool lolcat
+
+sudo pip  -U nltk install feedparser flask twython
+
+in python
+>>> import nltk
+>>> nltk.download()
+---set download dir to /usr/share/nltk_data
+``
 
 # GNAT API documentation
 
