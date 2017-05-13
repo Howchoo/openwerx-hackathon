@@ -51,19 +51,25 @@ def analyze_this():
 @app.route('/mastodonfeed', methods=['GET', 'POST'])
 def handle_mastodon_feed():
     
-    '''
-    mastodon_bucket_size = 10
-    mastodon_bucket_index = 0
-    mastodon_bucket = [None for x in range(mastodon_bucket_size)]
-    '''
+    bucket_size = 9
+    bucket_index = get_bucket_index()
     
     if request.method == 'POST':
-        mastodon_bucket[mastodon_bucket_index] = request.get_json()
-        if mastodon_bucket_index < mastodon_bucket_size: mastodon_bucket_index += 1
-        else: mastodon_bucket_index = 0
+        with open('temp/bucket.'+str(bucket_index), 'w+') as f:
+            f.write(str(request.get_json()))
+        increment_bucket()
         return '200'
     else:
-        return jsonify(mastodon_bucket)
+        data = []
+        
+        for x in range(bucket_size):
+            try:
+                with open('temp/bucket.'+str(bucket_index), 'r') as f:
+                    data.append(f.readlines())
+            except Exception as e:
+                raise e
+                
+        return jsonify(data)
 
 def construct_json(entry):
     
@@ -79,15 +85,26 @@ def construct_json(entry):
     
     return json
 
+def increment_bucket():
+    
+    bucket_size = 9
+    bucket_index = get_bucket_index()
+    
+    with open('temp/bucketindex.ddd', 'w') as f:
+        if bucket_index >= bucket_size: f.write(str(0))
+        else:
+            bucket_index += 1
+            f.write(str(bucket_index))
+        f.truncate()
+        
+    return
+
+def get_bucket_index():
+    bucket_size = 9
+    with open('temp/bucketindex.ddd', 'r') as f:
+        bucket_index = int(f.read())
+    return bucket_index
+
 if __name__ == '__main__':
-    
-    global mastodon_bucket_size
-    global mastodon_bucket_index
-    global mastodon_bucket
-    
-    mastodon_bucket_size = 10
-    mastodon_bucket_index = 0
-    mastodon_bucket = [None for x in range(mastodon_bucket_size)]
-    
     app.run(debug=True)
     

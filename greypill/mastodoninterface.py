@@ -34,7 +34,6 @@ class MastodonInterface:
         except Exception as e:
             raise
         
-        #self.listener.filter(track=['python'], async=True)
         print self.mastodon.public_stream(self.listener).next()
 
     def __initialize_environment_variables(self):
@@ -45,7 +44,7 @@ class MastodonInterface:
 class Listener(StreamListener):
 
     def on_update(self, status):
-        requests.post('http://localhost:5000/mastodonfeed', data = status)
+        requests.post('http://localhost:5000/mastodonfeed', json = status)
 
 if __name__ == '__main__':
     mastodon_instance = MastodonInterface()
