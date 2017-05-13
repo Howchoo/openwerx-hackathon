@@ -1,5 +1,6 @@
 import rssfeedinterface
 import sentimentanalyzer
+import markdown
 from BeautifulSoup import BeautifulSoup
 
 from flask import Flask
@@ -22,7 +23,7 @@ def most_recent():
     data = []
     for entry in feed.get_feed_entries():
         data.append(construct_json(entry))
-    
+
     return jsonify(data)
 
 @app.route('/by_tag', methods=['POST'])
@@ -69,7 +70,7 @@ def construct_json(entry):
     
     data = []
     
-    cleaned_summary = BeautifulSoup(entry['summary_detail']['value']).text
+    cleaned_summary = markdown.markdown(BeautifulSoup(entry['summary_detail']['value']).text)
     
     json = [{
         'title': entry['title'],
