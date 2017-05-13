@@ -54,16 +54,6 @@ class App extends Component {
 
 		const ctx = document.getElementById('postSentiment');
 
-		const postSentiment = new Chart(ctx,{
-			type: 'doughnut',
-			data: this.state.postSentiment.data,
-			options: {
-				legend: {
-					position: 'bottom'
-				}
-			}
-		});
-
 		/*
 		 * Set up tabs
 		 */
@@ -87,13 +77,14 @@ class App extends Component {
 				
 				const posts = data.map(post => post[0])
 				console.log('The most recent feed', posts)
-				this.setState({
-					posts
-				})
+				this.setState((prevState) => ({
+					posts,
+					updateNum: ++prevState.updateNum
+				}))
 			})
 	}
 	render() {
-		const { posts } = this.state
+		const { posts, updateNum } = this.state
 		return (
 			<div className="ui container">
 		  		<div className="ui container site-header">
@@ -134,7 +125,7 @@ class App extends Component {
 						<span className="ui orange ribbon label">SteemIt</span>
 						@todo graph
 					</div>
-					<SecondTab posts={posts} />
+					<SecondTab posts={posts} updateNum={updateNum}/>
 					<TagsTab />
 					<div className="footer">
 						Made with &lt;3 by <a href="https://dkelabs.com/">DKE Labs</a>

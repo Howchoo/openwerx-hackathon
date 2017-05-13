@@ -1,8 +1,9 @@
 import React from 'react'
 //import SteemExplorer from './SteemExplorer'
 import Post from './Post'
+import ChartComponent from './ChartComponent'
 
-const SecondTab = ({posts}) => (
+const SecondTab = ({posts, updateNum}) => (
 	<div className="ui bottom attached tab segment" data-tab="second">
 		{posts && posts.map((post,idx) => (
 			<div className="ui grid" key={idx}>
@@ -19,7 +20,7 @@ const SecondTab = ({posts}) => (
 							</div>
 						</div>
 					</div>
-					<canvas id="postSentiment" width="400" height="400"></canvas>
+					<ChartComponent post={post} updateNum={updateNum} />
 					<h3>Topics</h3>
 					<span className="ui green label">Signet</span>
 					<span className="ui label">Lorem</span>
