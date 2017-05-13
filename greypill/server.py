@@ -10,8 +10,10 @@ app = Flask(__name__)
 feed = rssfeedinterface.RssFeedInterface('https://streemian.com/rss/')
 analyzer = sentimentanalyzer.SentimentAnalyzer()
 
-@app.route('/top_entries')
-def top_entries():
+@app.route('/most_recent')
+def most_recent():
+    
+    feed.refresh_feed()
     
     data = []
     for entry in feed.get_feed_entries():
