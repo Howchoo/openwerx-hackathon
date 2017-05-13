@@ -1,6 +1,6 @@
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
-def getSetiment(paragraph):
+def getSetiment(string):
   sid = SentimentIntensityAnalyzer()
-  ss = sid.polarity_scores(talk)
+  ss = sid.polarity_scores(srting)
   return ss
