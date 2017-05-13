@@ -24,10 +24,10 @@ class MastodonInterface:
             self.mastodon.log_in(
                 self.email,
                 self.password,
-                to_file='pytooter_usercred.secret'
+                to_file='usercred.secret'
             )
         except Exception as e:
-            print e
+            raise
 
     def __initialize_environment_variables(self):
         self.client_name = util.get_config_value('mastodonClientName')
