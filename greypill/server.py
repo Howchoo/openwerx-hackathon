@@ -1,12 +1,9 @@
 import rssfeedinterface
 import sentimentanalyzer
-<<<<<<< HEAD
 import json
 import requests
 import util
-=======
 import markdown
->>>>>>> b034d7cd613b4edcdd3b0d60c96e6f3399b1f153
 from BeautifulSoup import BeautifulSoup
 
 from flask import Flask
