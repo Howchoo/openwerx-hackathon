@@ -31,15 +31,16 @@ class SteemExplorer extends Component {
 		this.setState({
 			selectedTrend: val.value
 		})
-		steem.api.getDiscussionsByTrending(val.value, (err, result) => {
-			console.log('discussions by trending');
-		  	console.log(err, result);
-		});
+		steem.api.getState(`/trending/${val.value}`, (err, result) => {
+            
+            
+            console.log(`/trends/${val.value}`, result);
+		})
 	}
 
-	getSelectedTrendingTopic() {
+	/*getSelectedTrendingTopic() {
 
-	}
+	}*/
 
 	mapOptions = (vals) => {
 		console.log('Trending', vals)
@@ -56,7 +57,6 @@ class SteemExplorer extends Component {
 				<Select
 					name='trending'
 					value={selectedTrend}
-
 					options={trendingOptions}
 					onChange={this.handleTrendingSelect}
 				/>
