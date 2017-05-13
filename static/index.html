@@ -18,19 +18,23 @@
                 </h2>
             </div>
             <div class="ui container">
-                <form class="ui form network-form" action="#" id="networkForm">
-                    <div class="fields">
-                        <div class="fourteen wide field">
-                            <select class="ui fluid search dropdown" name="network">
-                                <option value="">- Select Network for Analysis -</option>
-                                <option value="steemit">SteemIt</option>
-                            </select>
-                        </div>
-                        <div class="two wide field">
-                            <button type="submit" class="ui green button">Analyze</button>
-                        </div>
+                <div class="ui grid">
+                    <div class="eight wide column">
+                        <form class="ui form network-form" action="#" id="networkForm">
+                            <div class="fields">
+                                <div class="fourteen wide field">
+                                    <select class="ui fluid search dropdown" name="network">
+                                        <option value="">- Select Network for Analysis -</option>
+                                        <option value="steemit">SteemIt</option>
+                                    </select>
+                                </div>
+                                <div class="two wide field">
+                                    <button type="submit" class="ui green button">Analyze</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
 
                 <!-- start navigation tabs -->
                 <div class="ui top attached tabular menu">
@@ -80,6 +84,9 @@
                     </div>
                 </div>
                 <!-- end navigation tabs -->
+                <div class="footer">
+                    Made with &lt;3 by <a href="https://dkelabs.com/">DKE Labs</a>
+                </div>
             </div>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

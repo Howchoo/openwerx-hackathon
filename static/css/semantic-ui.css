@@ -530,7 +530,7 @@ input::selection {
 body {
   background-color: #efefef; }
 
-h1 {
+h1:first-child {
   margin-top: 0.5em; }
 
 .site-header {
@@ -541,6 +541,9 @@ h1 {
 
 .network-form {
   margin-bottom: 2em; }
+
+.footer {
+  text-align: center; }
 
 /*!
  * # Semantic UI 2.2.10 - Button
