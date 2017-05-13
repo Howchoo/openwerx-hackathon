@@ -1,4 +1,5 @@
 import rssfeedinterface
+import sentimentanalyzer
 
 from flask import Flask
 from flask import jsonify
@@ -12,8 +13,15 @@ def hello():
 
 @app.route("/top_entries")
 def top_entries():
+    
     feed = rssfeedinterface.RssFeedInterface('https://streemian.com/rss/')
-    return jsonify(feed.get_feed_titles())
+    analyzer = sentimentanalyzer.SentimentAnalyzer()
+    
+    data = []
+    for entry in feed.get_feed_entries():
+        data.append(analyzer.getSentiment(entry['summary_detail']['value']))
+    
+    return jsonify(data)
 
 if __name__ == "__main__":
     app.run(debug=True)

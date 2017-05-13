@@ -7,7 +7,7 @@ class SentimentAnalyzer():
     def __init__(self):
         self.sid = SentimentIntensityAnalyzer()
         
-    def getSentiment(paragraph):
+    def getSentiment(self, paragraph):
         return self.sid.polarity_scores(paragraph)
 
 if __name__ == '__main__':
