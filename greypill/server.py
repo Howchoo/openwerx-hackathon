@@ -45,6 +45,23 @@ def analyze_this():
         
     return jsonify(data)
 
+@app.route('/mastodonfeed', methods=['GET', 'POST'])
+def handle_mastodon_feed():
+    
+    '''
+    mastodon_bucket_size = 10
+    mastodon_bucket_index = 0
+    mastodon_bucket = [None for x in range(mastodon_bucket_size)]
+    '''
+    
+    if request.method == 'POST':
+        mastodon_bucket[mastodon_bucket_index] = request.get_json()
+        if mastodon_bucket_index < mastodon_bucket_size: mastodon_bucket_index += 1
+        else: mastodon_bucket_index = 0
+        return '200'
+    else:
+        return jsonify(mastodon_bucket)
+
 def construct_json(entry):
     
     data = []
@@ -60,5 +77,14 @@ def construct_json(entry):
     return json
 
 if __name__ == '__main__':
+    
+    global mastodon_bucket_size
+    global mastodon_bucket_index
+    global mastodon_bucket
+    
+    mastodon_bucket_size = 10
+    mastodon_bucket_index = 0
+    mastodon_bucket = [None for x in range(mastodon_bucket_size)]
+    
     app.run(debug=True)
     

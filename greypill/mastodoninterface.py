@@ -1,5 +1,7 @@
 import util
+import requests
 from mastodon import Mastodon
+from mastodon.streaming import StreamListener
 
 
 class MastodonInterface:
@@ -9,9 +11,12 @@ class MastodonInterface:
     client_name = None
     email = None
     password = None
+    listener = None
 
     def __init__(self):
         self.__initialize_environment_variables()
+        
+        self.listener = Listener()
 
         try:
             Mastodon.create_app(
@@ -28,11 +33,19 @@ class MastodonInterface:
             )
         except Exception as e:
             raise
+        
+        #self.listener.filter(track=['python'], async=True)
+        print self.mastodon.public_stream(self.listener).next()
 
     def __initialize_environment_variables(self):
         self.client_name = util.get_config_value('mastodonClientName')
         self.email = util.get_config_value('mastodonEmail')
         self.password = util.get_config_value('mastodonPassword')
+        
+class Listener(StreamListener):
+
+    def on_update(self, status):
+        requests.post('http://localhost:5000/mastodonfeed', data = status)
 
 if __name__ == '__main__':
     mastodon_instance = MastodonInterface()
