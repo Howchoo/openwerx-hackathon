@@ -46,7 +46,7 @@ def by_tag():
 @app.route('/analyze_this', methods=['POST'])
 def analyze_this():
     
-    data = []
+    data = {}
     for sentence in request.get_json()['sentences']:
         data.update(analyzer.getSentiment(sentence))
         
