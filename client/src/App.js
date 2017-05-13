@@ -57,7 +57,7 @@ class App extends Component {
 					const posts = data.map(post => post[0])
 					console.log('The most recent feed', posts)
 					this.setState((prevState) => ({
-						posts,
+						posts: posts.map((p,idx) => ({...p, id: prevState.totalPosts+idx})),
 						updateNum: ++prevState.updateNum,
 						allPosts: [...posts, ...prevState.allPosts].map((p,idx) => ({...p, id: idx})),
 						totalPosts: [...posts, ...prevState.allPosts].length
@@ -69,26 +69,11 @@ class App extends Component {
 			
 	}
 
-	startPlay = () => {
+	updateCount = () => {
 		
 		this.setState({ play: true})
 		this.getMostRecentData()
-		.then(() => {
-			sleep(7000)
-			return this.getMostRecentData()
-		})
-		.then(() => {
-			sleep(5000)
-			return this.getMostRecentData()
-		})
-		.then(() => {
-			sleep(5000)
-			return this.getMostRecentData()
-		})
-		.then(() => {
-			sleep(5000)
-			return this.getMostRecentData()
-		})
+		
 		
 		/*const self = this
 		let i = 3
@@ -129,8 +114,8 @@ class App extends Component {
 	                        <div className="two wide field">
 	                            <label>Live Analysis: {play ? 'on' : 'off'}</label>
 	                            <div className="ui icon buttons">
-	                                <button className="ui button active">
-	                                    <i className="play icon" onClick={this.startPlay}></i>
+	                                <button className="ui button">
+	                                    <i className="play icon" onClick={this.updateCount}></i>
 	                                </button>
 	                                <button className="ui button">
 	                                    <i className="pause icon" onClick={this.stopPlay}></i>
