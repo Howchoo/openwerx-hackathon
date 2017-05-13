@@ -7,6 +7,32 @@
         <link rel="stylesheet" type="text/css" href="css/semantic-ui.css" />
     </head>
     <body>
-        <div id="root"></div>
+        <div id="root">
+            <div class="ui container">
+                <!-- start navigation tabs -->
+                <div class="ui top attached tabular menu">
+                    <a class="active item" data-tab="first">SteemIt</a>
+                    <a class="item" data-tab="second">Mastadon</a>
+                    <a class="item" data-tab="third">ZeroMe</a>
+                    <a class="item" data-tab="fourth">IPFS</a>
+                </div>
+                <div class="ui bottom attached active tab segment" data-tab="first">
+                    <div class="ui big fluid action input">
+                        <input type="text" placeholder="Enter SteemIt URL...">
+                        <div class="ui button">Analyze</div>
+                    </div>
+                </div>
+                <div class="ui bottom attached tab segment" data-tab="second">
+                    Second
+                </div>
+                <div class="ui bottom attached tab segment" data-tab="third">
+                    Third
+                </div>
+                <div class="ui bottom attached tab segment" data-tab="fourth">
+                    Fourth
+                </div>
+                <!-- end navigation tabs -->
+            </div>
+        </div>
     </body>
 </html>
