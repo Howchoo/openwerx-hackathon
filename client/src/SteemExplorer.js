@@ -87,12 +87,16 @@ class SteemExplorer extends Component {
 				/>
 				{content && content.map(({name,body}) => (
 					<div className="ui grid">
-						<Post title={name} content={body} />
+						<div className="eight wide column">
+							<Post title={name} content={body} />
+						</div>
 					</div>
 				))}
 				{accounts && accounts.map(({name,body}) => (
 					<div className="ui grid">
-						<Post title={name} content={body} />
+						<div className="eight wide column">
+							<Post title={name} content={body} />
+						</div>
 					</div>
 				))}
 			</div>

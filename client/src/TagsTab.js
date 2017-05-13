@@ -7,6 +7,4 @@ const TagsTab = () => (
 	</div>
 )
 
-
-
 export default TagsTab
