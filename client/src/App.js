@@ -118,7 +118,7 @@ class App extends Component {
 						</div>
 	                    <div className="eight wide column right aligned">
 	                        <div className="two wide field">
-	                            <label>Update  </label>
+	                            <label>Load More </label>
 	                            <div className="ui icon buttons">
 	                                <button className="ui button">
 	                                    {play ? <div className="ui active inline loader"></div> : <i className="play icon" onClick={this.updateCount}></i>}
