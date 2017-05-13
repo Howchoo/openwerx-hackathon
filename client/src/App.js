@@ -22,7 +22,8 @@ class App extends Component {
 
 		this.state = {
 			posts: [],
-			
+			allPosts: [],
+			play: false
 		}
 	}
 	
@@ -43,7 +44,9 @@ class App extends Component {
 			location.reload();
 		});
 
+	}
 
+	getMostRecentData = () => {
 		// Get most recent posts
 		getMostRecent()
 			.then(({data}) => {
@@ -52,10 +55,28 @@ class App extends Component {
 				console.log('The most recent feed', posts)
 				this.setState((prevState) => ({
 					posts,
-					updateNum: ++prevState.updateNum
+					updateNum: ++prevState.updateNum,
+					allPosts: [...posts, ...prevState.allPosts]
 				}))
 			})
 	}
+
+	togglePlay = () => {
+		if(this.state.play === false) {
+			this.setState({ play: true})
+			let i = 3
+			while(i < 0) {
+				setTimeout(() => {
+					this.getMostRecentData()
+				},10000)
+				
+			}
+		} else {
+			this.setState({ play: false})
+		}
+
+	}
+
 	render() {
 		const { posts, updateNum } = this.state
 		return (
@@ -76,10 +97,10 @@ class App extends Component {
 	                            <label>Live Analysis: </label>
 	                            <div className="ui icon buttons">
 	                                <button className="ui button active">
-	                                    <i className="play icon"></i>
+	                                    <i className="play icon" onClick={this.togglePlay}></i>
 	                                </button>
 	                                <button className="ui button">
-	                                    <i className="pause icon"></i>
+	                                    <i className="pause icon" onClick={this.togglePlay}></i>
 	                                </button>
 	                            </div>
 	                        </div>
