@@ -10,7 +10,7 @@ const SecondTab = ({posts, updateNum, allPosts, totalPosts}) => (
         </div>
 		{posts && posts.map((post,idx) => (
 			<div className="ui stackable grid" key={post.id}>
-				<Post title={post.title} content={post.summary_detail} id={post.id} url={post.url} />
+				<Post title={post.title} content={post.summary_detail} id={post.id} url={post.url} lang={post.source_language} />
 				<Sentiment post={post} updateNum={updateNum} />
 			</div>
 		))}

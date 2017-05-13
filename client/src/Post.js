@@ -14,13 +14,13 @@ class Post extends Component {
 	}
 
 	render() {
-		const { title, content, id, url } = this.props
+		const { title, content, id, url, lang } = this.props
 		return (
 			<div className="eleven wide column">
 				<span className="ui orange ribbon label">Newest Post {id}</span>
 				<div className="ui text container">
 					<h1 className="ui header">
-						{title}
+						{title} <div className="ui red horizontal label">{lang}</div>
 						<div className="sub header header__link">{url}</div>
 					</h1>
 					<div className="ui divider"></div>
