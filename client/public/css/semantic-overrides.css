@@ -560,6 +560,10 @@ h1:first-child {
       height: 25%;
       background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff); }
 
+.loading-icon {
+  min-height: 7.5em;
+  position: relative !important; }
+
 /*!
  * # Semantic UI 2.2.10 - Button
  * http://github.com/semantic-org/semantic-ui/
@@ -29278,3 +29282,5 @@ html.ios {
 /*******************************
          Site Overrides
 *******************************/
+
+/*# sourceMappingURL=semantic-ui.css.map */

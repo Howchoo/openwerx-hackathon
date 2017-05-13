@@ -16,7 +16,6 @@ const TagsTab = () => {
 			<SteemExplorer style={{width: '200px'}} />
 			<div className="ui grid">
 				<Post title='Tags tab Post Title' content={placeholder} />
-				
 			</div>
 		</div>
 	)

@@ -3,7 +3,7 @@ import sentimentanalyzer
 import json
 import requests
 import util
-import markdown
+
 from BeautifulSoup import BeautifulSoup
 
 from flask import Flask
@@ -95,7 +95,7 @@ def handle_mastodon_feed():
 
 def construct_json(entry):
     
-    cleaned_summary = markdown.markdown(BeautifulSoup(entry['summary_detail']['value']).text)
+    cleaned_summary = BeautifulSoup(entry['summary_detail']['value']).text
     summary = cleaned_summary
     try:
         translation_data = translate(cleaned_summary).json()['data']
